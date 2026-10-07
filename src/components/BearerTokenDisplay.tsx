@@ -12,4 +12,5 @@ export function BearerTokenDisplay() {
   }
 
   return <p>Bearer Token: {token}</p>
+  
 }
