@@ -1,5 +1,5 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { getProperty } from '../api/properties'
+import { createFileRoute, notFound, Outlet } from '@tanstack/react-router'
+import { getProperty } from '../../api/properties'
 
 // valid list of property codes to save hitting the properties api with garbage codes
 const validPropertyCodes = new Set([
@@ -9,12 +9,12 @@ const validPropertyCodes = new Set([
 ])
 
 // used AI to help understand tanstack routing in general along with Routing Concepts documentation on https://tanstack.com/router/latest/docs/routing/routing-concepts
-export const Route = createFileRoute('/$propertyId')({
-  beforeLoad: ({params: { propertyId } }) => {
-    if (!validPropertyCodes.has(propertyId)) throw notFound()
+export const Route = createFileRoute('/properties/$propertiesId')({
+  beforeLoad: ({params: { propertiesId } }) => {
+    if (!validPropertyCodes.has(propertiesId)) throw notFound()
   },
-  loader: async ({ params: { propertyId } }) => { 
-    return getProperty(propertyId)
+  loader: async ({ params: { propertiesId } }) => { 
+    return getProperty(propertiesId)
   },
   pendingComponent: () => {
     return <p>... Finding Property</p>
