@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Outlet } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import { getProperty } from '../../api/properties'
 
 // valid list of property codes to save hitting the properties api with garbage codes
