@@ -14,7 +14,7 @@ export const Route = createFileRoute('/$propertyId')({
     if (!validPropertyCodes.has(propertyId)) throw notFound()
   },
   loader: async ({ params: { propertyId } }) => { 
-    return await getProperty(propertyId)
+    return getProperty(propertyId)
   },
   pendingComponent: () => {
     return <p>... Finding Property</p>
@@ -22,6 +22,14 @@ export const Route = createFileRoute('/$propertyId')({
   component: PropertyLayout,
   notFoundComponent: () => {
     return <p>404 - Page not found</p> // Because this is a top level url I need to pass a generic error for page not found 
+  },
+  errorComponent: ({ error }) => {
+    return (
+      <div>
+        <h2>Failed to load property</h2>
+        <p>{error instanceof Error ? error.message : 'Unknown error occurred'}</p>
+      </div>
+    )
   }
 })
 
